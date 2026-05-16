@@ -597,7 +597,10 @@
 
     let currentPage = 0;
 
-    const isPortraitMobile = () => window.matchMedia('(max-width: 420px) and (orientation: portrait)').matches;
+    const isPortraitMobile = () => {
+      // consider narrow screens as mobile portrait-friendly
+      return window.innerWidth <= 480 && window.innerHeight >= window.innerWidth;
+    };
 
     function showPage(index){
       pages.forEach((p, i) => {
@@ -643,9 +646,12 @@
 
     // initialize current view depending on device
     function initView(){
-      if(isPortraitMobile()){
+      const single = isPortraitMobile();
+      if(single){
+        document.body.classList.add('single-page');
         showPage(currentPage);
       } else {
+        document.body.classList.remove('single-page');
         // ensure all pages visible for 3D flip
         pages.forEach(p => { p.style.display = ''; });
       }
