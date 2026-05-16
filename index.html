@@ -598,15 +598,15 @@
     let currentPage = 0;
 
     const isMobileView = () => {
-      // Use single-page mode for small screens, including horizontal phone layout.
-      return window.innerWidth <= 900;
+      const minSize = Math.min(window.innerWidth, window.innerHeight);
+      // Use single-page mode for phones in portrait or landscape.
+      return minSize <= 600;
     };
 
     function showPage(index){
-      pages.forEach((p, i) => {
+      pages.forEach((p) => {
         p.classList.remove('current');
         p.classList.remove('flipped');
-        // ensure pages are visible in non-mobile too
         p.style.display = '';
       });
       if(pages[index]){
@@ -674,7 +674,6 @@
 
       book.addEventListener('touchmove', (e) => {
         if(!isTouch) return;
-        // prevent vertical scrolling for horizontal swipes
         const touch = e.touches[0];
         const dx = Math.abs(touch.clientX - startX);
         const dy = Math.abs(touch.clientY - startY);

@@ -181,6 +181,10 @@ body.single-page .back{
   border-radius:10px;
 }
 
+#book{
+  touch-action: pan-y;
+}
+
 button:hover{
   transform:scale(1.03);
   background:rgba(0,0,0,0.95);
