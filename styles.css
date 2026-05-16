@@ -103,12 +103,24 @@ button{
   .book{
     aspect-ratio:unset;
     width:100%;
-    height:calc(100vh - 140px);
+    height:auto;
     max-height:none;
+    perspective:none;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    border-radius:16px;
+    padding:8px;
+  }
+
+  .page{
+    position:relative;
+    transform-origin:center;
+    position:relative;
   }
 
   .page img{
     object-fit:contain;
+    width:100%;
+    height:auto;
   }
 
   button{
