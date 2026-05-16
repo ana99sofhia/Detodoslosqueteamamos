@@ -597,14 +597,32 @@
 
     let currentPage = 0;
 
+    const isPortraitMobile = () => window.matchMedia('(max-width: 420px) and (orientation: portrait)').matches;
+
+    function showPage(index){
+      pages.forEach((p, i) => {
+        p.classList.remove('current');
+        p.classList.remove('flipped');
+        // ensure pages are visible in non-mobile too
+        p.style.display = '';
+      });
+      if(pages[index]){
+        pages[index].classList.add('current');
+      }
+    }
+
     function nextPage(){
 
       if(currentPage < pages.length){
-
-        pages[currentPage].classList.add("flipped");
-
-        currentPage++;
-
+        if(isPortraitMobile()){
+          if(currentPage < pages.length - 1){
+            currentPage++;
+            showPage(currentPage);
+          }
+        } else {
+          pages[currentPage].classList.add("flipped");
+          currentPage++;
+        }
       }
 
     }
@@ -612,14 +630,32 @@
     function prevPage(){
 
       if(currentPage > 0){
-
-        currentPage--;
-
-        pages[currentPage].classList.remove("flipped");
-
+        if(isPortraitMobile()){
+          currentPage--;
+          showPage(currentPage);
+        } else {
+          currentPage--;
+          pages[currentPage].classList.remove("flipped");
+        }
       }
 
     }
+
+    // initialize current view depending on device
+    function initView(){
+      if(isPortraitMobile()){
+        showPage(currentPage);
+      } else {
+        // ensure all pages visible for 3D flip
+        pages.forEach(p => { p.style.display = ''; });
+      }
+    }
+
+    window.addEventListener('resize', initView);
+    window.addEventListener('orientationchange', initView);
+
+    // initial setup
+    initView();
 
     // Touch / swipe support for mobile
     (function(){

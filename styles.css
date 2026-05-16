@@ -154,6 +154,33 @@ button{
   }
 }
 
+/* Mobile portrait: show one page at a time (no 3D) */
+@media (max-width: 420px) and (orientation: portrait) {
+  .book{
+    padding:0;
+  }
+
+  .page{
+    display:none;
+    position:static;
+    width:100%;
+    height:auto;
+    transform:none !important;
+    box-shadow:none;
+    margin-bottom:12px;
+  }
+
+  .page.current{
+    display:block;
+  }
+
+  .front, .back{
+    position:relative;
+    box-shadow:none;
+    border-radius:10px;
+  }
+}
+
 button:hover{
   transform:scale(1.03);
   background:rgba(0,0,0,0.95);
