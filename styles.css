@@ -155,30 +155,30 @@ button{
 }
 
 /* Mobile portrait: show one page at a time (no 3D) */
-@media (max-width: 420px) and (orientation: portrait) {
-  .book{
-    padding:0;
-  }
+/* When `.single-page` is set on the body, show only the `.page.current` (for narrow phones) */
+body.single-page .book{
+  padding:0;
+}
 
-  .page{
-    display:none;
-    position:static;
-    width:100%;
-    height:auto;
-    transform:none !important;
-    box-shadow:none;
-    margin-bottom:12px;
-  }
+body.single-page .page{
+  display:none !important;
+  position:static;
+  width:100%;
+  height:auto;
+  transform:none !important;
+  box-shadow:none;
+  margin-bottom:12px;
+}
 
-  .page.current{
-    display:block;
-  }
+body.single-page .page.current{
+  display:block !important;
+}
 
-  .front, .back{
-    position:relative;
-    box-shadow:none;
-    border-radius:10px;
-  }
+body.single-page .front,
+body.single-page .back{
+  position:relative;
+  box-shadow:none;
+  border-radius:10px;
 }
 
 button:hover{
